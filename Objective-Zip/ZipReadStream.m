@@ -54,7 +54,7 @@
 	int bytes = unzReadCurrentFile(_unzFile, [data mutableBytes], (unsigned)length);
 	if (bytes < 0) {
 		NSString *reason= [NSString stringWithFormat:@"Error in reading '%@' in the zipfile", _fileNameInZip];
-		@throw [[ZipException alloc] initWithError:bytes reason:reason];
+		@throw [[[ZipException alloc] initWithError:bytes reason:reason] autorelease];
 	}
 	
 	[data setLength:bytes];
@@ -65,7 +65,7 @@
 	int err= unzCloseCurrentFile(_unzFile);
 	if (err != UNZ_OK) {
 		NSString *reason= [NSString stringWithFormat:@"Error in closing '%@' in the zipfile", _fileNameInZip];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
+		@throw [[[ZipException alloc] initWithError:err reason:reason] autorelease];
 	}
 }
 
